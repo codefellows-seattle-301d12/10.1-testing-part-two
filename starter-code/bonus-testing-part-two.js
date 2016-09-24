@@ -34,15 +34,36 @@ function assert(expression, successMessage, failureMessage) {
 var mealsPerDay = [5, 4, 3, 6, 2, 4, 3, 4, 5, 1];
 var tooHungryDay;
 
+ateTheCaretaker();
+
 assert(
   typeof(tooHungryDay) === 'number',
   'The lion appears to be too hungry after ' + tooHungryDay + ' days...',
   'tooHungryDay should be a number but instead is a data type of ' + typeof(tooHungryDay)
 );
 
+assert(
+  tooHungryDay <= mealsPerDay.length,
+  'tooHungryDay was a possible day.',
+  'tooHungryDay was too high of a number and wasn\'t one of the possible days.'
+);
   /* TODO:
      Write a second test asserting that tooHungryDay falls within an acceptable answer
      based on the number of days available in the array. */
+
+function ateTheCaretaker() {
+  var mealAverage;
+  var eaten = false;
+  mealsPerDay.reduce(function(curr, next, idx) {
+    mealAverage = (curr + next) / (idx + 1);
+    console.log('Day ' + (idx + 1) + ' meal average: ' + mealAverage);
+    if (mealAverage < 4 && eaten === false) {
+      tooHungryDay = idx + 1;
+      eaten = true;
+    }
+    return curr + next;
+  }, 0);
+}
 
   /*
    TODO:
