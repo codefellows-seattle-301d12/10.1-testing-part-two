@@ -34,18 +34,32 @@ function assert(expression, successMessage, failureMessage) {
 var mealsPerDay = [5, 4, 3, 6, 2, 4, 3, 4, 5, 1];
 var tooHungryDay;
 
+var mealsPerDayAverage = 0;
+for (i=0;i<mealsPerDay.length;i++) {
+  mealsPerDayAverage = (mealsPerDayAverage + mealsPerDay[i])/(i+1);
+  if(mealsPerDayAverage<4) {
+    tooHungryDay = (i + 1);
+  };
+};
+
 assert(
   typeof(tooHungryDay) === 'number',
   'The lion appears to be too hungry after ' + tooHungryDay + ' days...',
   'tooHungryDay should be a number but instead is a data type of ' + typeof(tooHungryDay)
 );
 
-  /* TODO:
+  /* DONE:
      Write a second test asserting that tooHungryDay falls within an acceptable answer
      based on the number of days available in the array. */
 
+assert(
+  tooHungryDay>0 && tooHungryDay<=mealsPerDay.length,
+  'tooHungryDay '+tooHungryDay+' in accepatble range. greater than 0. less than or equal to mealsPerDay.length: '+mealsPerDay.length,
+  'tooHungryDay '+tooHungryDay+' not in acceptable range. must be greater than 0 and less than or equal to mealsPerDay.length: '+mealsPerDay.length
+);
+
   /*
-   TODO:
+   DONE:
    Cycle through the days in mealsPerDay. Log the cumulative average
    meals/day the lion ate since the new caretaker started.
    tooHungryDay should be equal to the day the lion started
